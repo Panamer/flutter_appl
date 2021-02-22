@@ -1,169 +1,113 @@
 import 'package:flutter/material.dart';
-
-import 'package:english_words/english_words.dart';
-import 'model/post.dart';
-
+import 'package:flutter_appl/pages/BalanceScreen.dart';
+import 'package:flutter_appl/pages/ContactsScreen.dart';
+import 'package:flutter_appl/pages/MusicScreen.dart';
 void main() => runApp(new MyApp());
 
+/// build 相当于render
+/// MaterialApp应⽤组件: 封装了应⽤程序所需要的⼀些Widget，⾥⾯会有已有的⼀些组件
+/// Scaffold脚⼿架组件
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'flutter Generator',
-      theme: new ThemeData(
-        primaryColor: Colors.redAccent,
-      ),
-      home: new RandomWords(),
+    return MaterialApp(
+      // home: FirstScreen(),
+      title: 'Flutter Big', // 只有在安卓 且 进入后台页面时才显示。 所以用处不大
+      routes: <String, WidgetBuilder> {
+        '/first': (BuildContext context) => new FirstScreen(),
+        '/second': (BuildContext context) => new SecondScreen('显示的内容', title: '标题')
+      },
+      initialRoute: '/second',
+      theme: ThemeData(primaryColor: Colors.orange),
     );
   }
 }
-// 创建一个state类
-class RandomWordsState extends State<RandomWords> {
-  final _suggestions = <WordPair>[];
-
-  final _saved = new Set<WordPair>();
-
-  final _biggerFont = const TextStyle(fontSize: 18.0);
-
-  Widget _buildSuggestions() {
-    return new ListView.builder(
-      padding: const EdgeInsets.all(16.0),
-      // 对于每个建议的单词对都会调用一次itemBuilder，然后将单词对添加到ListTile行中
-      itemBuilder: (context, i) {
-        // 奇数行 添加一个分割线
-        if (i.isOdd) return new Divider();
-
-        // 语法 "i ~/ 2" 表示i除以2，但返回值是整形（向下取整），比如i为：1, 2, 3, 4, 5
-        // 时，结果为0, 1, 1, 2, 2， 这可以计算出ListView中减去分隔线后的实际单词对数量
-        final index = i ~/ 2;
-        // 如果是建议列表中最后一个单词对
-        if (index >= _suggestions.length) {
-          // ...接着再生成10个单词对，然后添加到建议列表
-          _suggestions.addAll(generateWordPairs().take(5));
-        }
-        // 偶数行添加一个listtile
-        return _buildRow(_suggestions[index]);
-      }
+/// 首页
+class FirstScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: new AppBar(
+        title: new Text('首页标题')
+      ),
+      body: new Center(
+        child: new Text('首页显示的内容!!'),
+      ),
     );
   }
+}
 
-  Widget _buildRow(WordPair pair) {
-    final alreadySaved = _saved.contains(pair);
-    return new ListTile(
-      title: new Text(
-        pair.asPascalCase,
-        style: _biggerFont,
-      ),
-      trailing: new Icon(
-        alreadySaved ? Icons.favorite : Icons.favorite_border,
-        color: alreadySaved ? Colors.red : null,
-      ),
-      onTap: () {
-        setState(() {
-          if (alreadySaved) {
-            _saved.remove(pair);
-          } else {
-            _saved.add(pair);
-          }
-        });
-      },
-    );
+class SecondScreen extends StatefulWidget {
+  final String content;
+  final String title;
+  // 构造函数
+  SecondScreen(this.content, {this.title});
+  
+  @override
+  _SecondScreenState createState() => _SecondScreenState();
+}
+
+class _SecondScreenState extends State<SecondScreen> {
+
+  // 定义界面容器
+  final List<Widget> _children = [
+    BalanceScreen(),
+    ContactScreen(),
+    MusicScreen()
+  ];
+
+  int _currentIndex = 0;
+
+  void onTabTapped(int selectIndex) {
+    setState(() {
+      _currentIndex = selectIndex;
+    });
   }
+
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold (
-      appBar: new AppBar(
-        title: new Text('Startup Name Generator'),
-        actions: <Widget>[
-          new IconButton(icon: new Icon(Icons.list), onPressed: _pushSaved),
-        ],
-      ),
-      body: _buildSuggestions(),
-    );
-  }
-
-  void _pushSaved() {
-    Navigator.of(context).push(
-      new MaterialPageRoute(
-        builder: (context) {
-          final tiles = _saved.map(
-            (pair) {
-              return new ListTile(
-                title: new Text(
-                  pair.asPascalCase,
-                  style: _biggerFont,
-                ),
-                onTap: () {
-                  _pushImages();
-                },
-              );
-            },
-          );
-          final divided = ListTile
-            .divideTiles(
-              context: context,
-              tiles: tiles,
-            )
-            .toList();
-          return new Scaffold(
-            appBar: new AppBar(
-              title: new Text('Saved Suggestions'),
+    return Scaffold(
+      // appBar: new AppBar(
+      //   title: new Text('${widget.title}')
+      // ),
+      body: _children[_currentIndex],
+      drawer: new Drawer(
+        child: new Center(
+          child: Text(
+            'Drawer',
+            style: new TextStyle(
+              fontSize: 20.0,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold
             ),
-            body: new ListView(children: divided),
-          );
-        },
+          ),
+        ),
       ),
-    );
-  }
-
-  void _pushImages() {
-    Navigator.of(context).push(
-      new MaterialPageRoute(
-        builder: (context) {
-          return new Scaffold(
-            backgroundColor: Colors.grey[100],
-            appBar: new AppBar(
-              title: new Text('Saved Suggestions'),
-            ),
-            body: ListView.builder(
-              itemCount: posts.length,
-              itemBuilder: _listItemBuilder
-            )
-          );
-        }
-      )
-    );
-  }
-
-  Widget _listItemBuilder(BuildContext context, int index) {
-    final imageUrl = 'https://upload-images.jianshu.io/upload_images/5361063-e413832da0038304.png?imageMogr2/auto-orient/strip%7CimageView2/0/w/700';
-    return new Container(
-      color: Colors.white,
-      margin: new EdgeInsets.all(8.0),
-      child: Column(
-        children: <Widget>[
-          Image.network(imageUrl),
-          // Image.network("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.res.jmbbs.com%2Fattachment%2Fforum%2F201906%2F24%2F135227gz22kwp1rp12zcc2.jpg&refer=http%3A%2F%2Fimg.res.jmbbs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1616410199&t=11751a1cca65fd8e06c4541bb94ecbba"),
-          SizedBox(height: 16.0),
-          Text(
-            posts[index].title,
-            style: Theme.of(context).textTheme.subtitle1
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.red,
+        unselectedItemColor: Colors.blueGrey,
+        currentIndex: _currentIndex,
+        onTap: onTabTapped,
+        items: [
+          new BottomNavigationBarItem(
+            icon: Icon(Icons.account_balance),
+            // ignore: deprecated_member_use
+            title: Text('银行')
           ),
-          Text(
-            posts[index].author,
-            style: Theme.of(context).textTheme.caption
+          new BottomNavigationBarItem(
+            icon: Icon(Icons.contacts),
+            title: Text('联系人'),
           ),
-          SizedBox(height: 16.0)
+          new BottomNavigationBarItem(
+            icon: Icon(Icons.library_music),
+            title: Text('音乐')
+          ),
         ],
       ),
     );
   }
-
 }
 
-// 添加一个state
-class RandomWords extends StatefulWidget {
-  @override
-  createState() => new RandomWordsState();
-}
+
+// 从 fluter 到 原生  再到flutter页面， 性能消耗很大， 每到一个flutter页面启动一次渲染引擎
