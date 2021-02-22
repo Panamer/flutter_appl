@@ -109,6 +109,7 @@ class RandomWordsState extends State<RandomWords> {
           return new Scaffold(
             appBar: new AppBar(
               title: new Text('Saved Suggestions'),
+              elevation: 0.0, // 去掉阴影
             ),
             body: new ListView(children: divided),
           );
