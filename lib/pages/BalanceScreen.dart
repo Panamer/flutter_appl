@@ -18,14 +18,14 @@ class BalanceScreen extends StatelessWidget {
         child: Column(
           children: <Widget>[
             new Text(
-              '银行0',
+              'Column',
               style: TextStyle(
                 color: Colors.red,
                 fontSize: 20, 
               ),
             ),
             new Text(
-              '银行1',
+              '竖直布局',
               style: TextStyle(
                 color: Colors.red,
                 fontSize: 20, 
@@ -38,15 +38,15 @@ class BalanceScreen extends StatelessWidget {
               child: new Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  new Text('1'),
-                  new Text('1'),
-                  new Text('1'),
+                  new Text('Row'),
+                  new Text('横向'),
+                  new Text('布局'),
                   new Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      new Text('2'),
-                      new Text('3'),
-                      new Text('4'),
+                      new Text('Column'),
+                      new Text('竖直'),
+                      new Text('布局'),
                    ], 
                   )
                 ], 
