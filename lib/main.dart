@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_appl/pages/FirstScreen.dart';
 import 'package:flutter_appl/pages/SecondScreen.dart';
 
 void main() => runApp(new MyApp());
@@ -21,24 +22,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-/// 首页
-class FirstScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: new AppBar(
-        title: new Text('首页标题')
-      ),
-      body: new Center(
-        child: new TextButton(
-          child: Text('点击我跳转页面'),
-          onPressed: () {
-            Navigator.pushNamed(context, '/second');
-          },
-        )
-      ),
-    );
-  }
-}
-
-// 从 fluter 到 原生  再到flutter页面， 性能消耗很大， 每到一个flutter页面启动一次渲染引擎

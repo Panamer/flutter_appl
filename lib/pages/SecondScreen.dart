@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_appl/pages/FavoriteList.dart';
-import 'package:flutter_appl/pages/ContactsScreen.dart';
-import 'package:flutter_appl/pages/MusicScreen.dart';
+import 'package:flutter_appl/pages/widgets/FavoriteList.dart';
+import 'package:flutter_appl/pages/widgets/ContactsScreen.dart';
+import 'package:flutter_appl/pages/widgets/MusicScreen.dart';
 
 class SecondScreen extends StatefulWidget {
   final String content;
@@ -30,7 +30,6 @@ class _SecondScreenState extends State<SecondScreen> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,18 +37,6 @@ class _SecondScreenState extends State<SecondScreen> {
       //   title: new Text('${widget.title}')
       // ),
       body: _children[_currentIndex],
-      drawer: new Drawer(
-        child: new Center(
-          child: Text(
-            'Drawer',
-            style: new TextStyle(
-              fontSize: 20.0,
-              color: Colors.blue,
-              fontWeight: FontWeight.bold
-            ),
-          ),
-        ),
-      ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.red,
         unselectedItemColor: Colors.blueGrey,
