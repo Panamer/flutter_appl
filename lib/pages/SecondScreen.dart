@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_appl/pages/find/FindScreen.dart';
 import 'package:flutter_appl/pages/widgets/BalanceScreen.dart';
 import 'package:flutter_appl/pages/widgets/FavoriteList.dart';
-import 'package:flutter_appl/pages/widgets/ContactsScreen.dart';
 import 'package:flutter_appl/pages/widgets/MusicScreen.dart';
 
 class SecondScreen extends StatefulWidget {
@@ -19,7 +19,7 @@ class _SecondScreenState extends State<SecondScreen> {
   // 定义界面容器
   final List<Widget> _children = [
     FavoriteList(),
-    ContactScreen(),
+    FindScreen(),
     MusicScreen(),
     BalanceScreen()
   ];
@@ -88,7 +88,7 @@ class _SecondScreenState extends State<SecondScreen> {
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed , // 设置tabBar固定 不悬浮
-        selectedItemColor: Colors.red,
+        selectedItemColor: Color.fromARGB(255, 242, 89, 63),
         unselectedItemColor: Colors.blueGrey,
         currentIndex: _currentIndex,
         onTap: onTabTapped,
