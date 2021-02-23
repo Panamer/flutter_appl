@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         '/first': (BuildContext context) => new FirstScreen(),
         '/second': (BuildContext context) => new SecondScreen('显示的内容', title: '标题')
       },
-      initialRoute: '/second',
+      initialRoute: '/first',
       theme: ThemeData(primaryColor: Colors.orange),
     );
   }
@@ -31,7 +31,12 @@ class FirstScreen extends StatelessWidget {
         title: new Text('首页标题')
       ),
       body: new Center(
-        child: new Text('首页显示的内容!!'),
+        child: new TextButton(
+          child: Text('点击我跳转页面'),
+          onPressed: () {
+            Navigator.pushNamed(context, '/second');
+          },
+        )
       ),
     );
   }
