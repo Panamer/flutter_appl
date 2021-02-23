@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_appl/pages/widgets/BalanceScreen.dart';
 import 'package:flutter_appl/pages/widgets/FavoriteList.dart';
 import 'package:flutter_appl/pages/widgets/ContactsScreen.dart';
 import 'package:flutter_appl/pages/widgets/MusicScreen.dart';
@@ -19,10 +20,58 @@ class _SecondScreenState extends State<SecondScreen> {
   final List<Widget> _children = [
     FavoriteList(),
     ContactScreen(),
-    MusicScreen()
+    MusicScreen(),
+    BalanceScreen()
   ];
 
   int _currentIndex = 0;
+
+  List<BottomNavigationBarItem> _itemList = [
+    BottomNavigationBarItem(
+      icon: Image.asset(
+        'assets/images/invite_normal.png',
+        width: 24, height: 24,
+      ),
+      title: new Text('好友'),
+      activeIcon: Image.asset(
+        'assets/images/invite_selected.png',
+        width: 24, height: 24
+      )
+    ),
+    BottomNavigationBarItem(
+        icon: Image.asset(
+          'assets/images/discovery_normal.png',
+          width: 24, height: 24
+        ),
+        title: new Text('发现'),
+        activeIcon: Image.asset(
+          'assets/images/discovery_selected.png',
+          width: 24, height: 24
+        )
+      ),
+      BottomNavigationBarItem(
+        icon: Image.asset(
+          'assets/images/manager_normal.png',
+          width: 24, height: 24
+        ),
+        title: new Text('管理'),
+        activeIcon: Image.asset(
+          'assets/images/manager_selected.png',
+          width: 24, height: 24
+        )
+      ),
+      BottomNavigationBarItem(
+        icon: Image.asset(
+          'assets/images/mine_normal.png',
+          width: 24, height: 24
+        ),
+        title: new Text('我的'),
+        activeIcon: Image.asset(
+          'assets/images/mine_selected.png',
+          width: 24, height: 24
+        )
+      ),
+  ];
 
   void onTabTapped(int selectIndex) {
     setState(() {
@@ -38,25 +87,12 @@ class _SecondScreenState extends State<SecondScreen> {
       // ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed , // 设置tabBar固定 不悬浮
         selectedItemColor: Colors.red,
         unselectedItemColor: Colors.blueGrey,
         currentIndex: _currentIndex,
         onTap: onTabTapped,
-        items: [
-          new BottomNavigationBarItem(
-            icon: Icon(Icons.account_balance),
-            // ignore: deprecated_member_use
-            title: Text('列表')
-          ),
-          new BottomNavigationBarItem(
-            icon: Icon(Icons.contacts),
-            title: Text('联系人'),
-          ),
-          new BottomNavigationBarItem(
-            icon: Icon(Icons.library_music),
-            title: Text('音乐')
-          ),
-        ],
+        items: _itemList,
       ),
     );
   }

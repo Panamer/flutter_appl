@@ -13,9 +13,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // home: FirstScreen(),
       title: 'Flutter Big', // 只有在安卓 且 进入后台页面时才显示。 所以用处不大
-      routes: <String, WidgetBuilder> {
+      routes: <String, WidgetBuilder>{
         '/first': (BuildContext context) => new FirstScreen(),
-        '/second': (BuildContext context) => new SecondScreen('显示的内容', title: '标题')
+        '/second': (BuildContext context) =>
+            new SecondScreen('显示的内容', title: '标题')
       },
       initialRoute: '/first',
       theme: ThemeData(primaryColor: Colors.orange),
