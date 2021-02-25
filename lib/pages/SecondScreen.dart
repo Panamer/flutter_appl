@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_appl/pages/FirstScreen.dart';
 import 'package:flutter_appl/pages/find/FindScreen.dart';
 import 'package:flutter_appl/pages/widgets/BalanceScreen.dart';
 import 'package:flutter_appl/pages/widgets/FavoriteList.dart';
-import 'package:flutter_appl/pages/widgets/MusicScreen.dart';
 
 class SecondScreen extends StatefulWidget {
   final String content;
@@ -18,9 +18,9 @@ class _SecondScreenState extends State<SecondScreen> {
 
   // 定义界面容器
   final List<Widget> _children = [
+    FirstScreen(),
     FavoriteList(),
     FindScreen(),
-    MusicScreen(),
     BalanceScreen()
   ];
 
@@ -32,7 +32,7 @@ class _SecondScreenState extends State<SecondScreen> {
         'assets/images/invite_normal.png',
         width: 24, height: 24,
       ),
-      title: new Text('好友'),
+      title: new Text('首页'),
       activeIcon: Image.asset(
         'assets/images/invite_selected.png',
         width: 24, height: 24
@@ -43,7 +43,7 @@ class _SecondScreenState extends State<SecondScreen> {
           'assets/images/discovery_normal.png',
           width: 24, height: 24
         ),
-        title: new Text('发现'),
+        title: new Text('社区'),
         activeIcon: Image.asset(
           'assets/images/discovery_selected.png',
           width: 24, height: 24
@@ -54,7 +54,7 @@ class _SecondScreenState extends State<SecondScreen> {
           'assets/images/manager_normal.png',
           width: 24, height: 24
         ),
-        title: new Text('管理'),
+        title: new Text('发现'),
         activeIcon: Image.asset(
           'assets/images/manager_selected.png',
           width: 24, height: 24

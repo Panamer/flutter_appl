@@ -7,7 +7,7 @@ class BalanceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
-        title: new Text('银行'), 
+        title: new Text('我的'), 
       ),
       body:_buildContent()
     );
@@ -18,14 +18,15 @@ class BalanceScreen extends StatelessWidget {
         child: Column(
           children: <Widget>[
             new Text(
-              'Column',
+              'Column第一行超出第行超出超出Column第行超出',
               style: TextStyle(
                 color: Colors.red,
                 fontSize: 20, 
               ),
+              overflow: TextOverflow.ellipsis,
             ),
             new Text(
-              '竖直布局',
+              'Column第二行',
               style: TextStyle(
                 color: Colors.red,
                 fontSize: 20, 

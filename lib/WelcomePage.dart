@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_appl/Application.dart';
-import 'package:flutter_appl/pages/FirstScreen.dart';
+import 'package:flutter_appl/pages/SecondScreen.dart';
 
 class WelcomPage extends StatefulWidget {
   WelcomPage({Key key}) : super(key: key);
@@ -36,7 +36,7 @@ class _WelcomPageState extends State<WelcomPage> {
   // 打开新的页面， 把欢迎页的路由删掉 节省内存
   goHomePage() {
     Navigator.of(context).pushAndRemoveUntil(
-      new MaterialPageRoute(builder: (context) => FirstScreen()), 
+      new MaterialPageRoute(builder: (context) => new SecondScreen('显示的内容', title: '标题')), 
       (route) => route == null
     );
   }

@@ -144,7 +144,6 @@ class RandomWordsState extends State<RandomWords> {
       child: Column(
         children: <Widget>[
           Image.network(imageUrl),
-          // Image.network("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.res.jmbbs.com%2Fattachment%2Fforum%2F201906%2F24%2F135227gz22kwp1rp12zcc2.jpg&refer=http%3A%2F%2Fimg.res.jmbbs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1616410199&t=11751a1cca65fd8e06c4541bb94ecbba"),
           SizedBox(height: 16.0),
           Text(
             posts[index].title,
