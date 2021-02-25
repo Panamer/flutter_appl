@@ -27,6 +27,7 @@ class Company {
     @required this.inc
   });
 
+//------------------------本地Mock数据的方式--------------------------
   //json sting转 List<Company>
   static List<Company> fromJson(String json) {
     List<Company> listMode = new List<Company>();
@@ -51,6 +52,32 @@ class Company {
         hot: map['hot'],
         count: map['count'],
         inc: map['inc']);
+  }
+
+  //------------------------网络数据的方式--------------------------
+    //json sting转 List<Company>
+  static List<Company> fromMapData(Map data) {
+    List<Company> listMode = new List<Company>();
+    List list = data['list'];
+    list.forEach((v) {
+      var model = Company.fromMap1(v);
+      listMode.add(model);
+    });
+
+    return listMode;
+  }
+
+    static Company fromMap1(Map map) {
+    return new Company(
+        logo: map['logo_url'],
+        name: map['market_name'],
+        location: map['download_times_fixed'],
+        type: map['type'],
+        size: map['tag'],
+        employee: map['market_id'],
+        hot: map['download_times_fixed'],
+        count: map['cid2'],
+        inc: map['baike_name']);
   }
 
 }

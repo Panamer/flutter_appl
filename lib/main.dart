@@ -2,8 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_appl/WelcomePage.dart';
 import 'package:flutter_appl/pages/FirstScreen.dart';
 import 'package:flutter_appl/pages/SecondScreen.dart';
+import 'package:flutter_appl/provider/find_list.dart';
+import 'package:provider/provider.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(
+  MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => FindListProvider())
+    ],
+    child: MyApp(),
+  ),
+);
 
 /// build 相当于render
 /// MaterialApp应⽤组件: 封装了应⽤程序所需要的⼀些Widget，⾥⾯会有已有的⼀些组件
